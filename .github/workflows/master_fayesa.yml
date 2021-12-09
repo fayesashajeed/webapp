@@ -22,15 +22,15 @@ jobs:
     - name: Log in to registry
       uses: docker/login-action@v1
       with:
-        registry: https://mcr.microsoft.com/
-        username: ${{ secrets.AzureAppService_ContainerUsername_2cfeb37878234eb38d1cdc0a4ff6394c }}
-        password: ${{ secrets.AzureAppService_ContainerPassword_7ef71097c000491e9b78b14f66eb437b }}
+        registry: https://fayesa.azurewebsites.net/
+        username: ${{ secrets.AzureAppService_ContainerUsername_7a04fd88199a421fa0c3a40480fab56b }}
+        password: ${{ secrets.AzureAppService_ContainerPassword_88f957e115164c6c94ddc25363b58979 }}
 
     - name: Build and push container image to registry
       uses: docker/build-push-action@v2
       with:
         push: true
-        tags: mcr.microsoft.com/${{ secrets.AzureAppService_ContainerUsername_2cfeb37878234eb38d1cdc0a4ff6394c }}/appsvc/staticsite:${{ github.sha }}
+        tags: fayesa.azurewebsites.net/${{ secrets.AzureAppService_ContainerUsername_7a04fd88199a421fa0c3a40480fab56b }}/appsvc/staticsite:${{ github.sha }}
         file: ./Dockerfile
 
   deploy:
@@ -47,5 +47,5 @@ jobs:
       with:
         app-name: 'fayesa'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_1549fbab4ae5410788ac03ed6edc2bd2 }}
-        images: 'mcr.microsoft.com/${{ secrets.AzureAppService_ContainerUsername_2cfeb37878234eb38d1cdc0a4ff6394c }}/appsvc/staticsite:${{ github.sha }}'
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_1f15be668b0543fba8e522dc1e541d78 }}
+        images: 'fayesa.azurewebsites.net/${{ secrets.AzureAppService_ContainerUsername_7a04fd88199a421fa0c3a40480fab56b }}/appsvc/staticsite:${{ github.sha }}'
